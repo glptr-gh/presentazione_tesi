@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archivio Ms4300 - Busta 40</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
+    <style>
+        body { 
+            font-family: 'Garamond', serif; 
+            background-color: #f4f4f4; 
+            margin: 0; 
+            color: #333;
+        }
+        
+        .site-header {
+            background-color: #8b5a2b; 
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .container { 
+            width: 80%; 
+            margin: 40px auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+        }
+
+        table.dataTable thead th {
+            background-color: #c19a6b;
+            color: white;
+            border-bottom: none;
+            padding: 15px;
+        }
+
+        table.dataTable tbody tr:nth-child(even) {
+            background-color: #fdf5e6; 
+        }
+
+        table.dataTable tbody tr:hover {
+            background-color: #ffe4b5 !important;
+        }
+
+        table.dataTable.row-border tbody th, 
+        table.dataTable.row-border tbody td {
+            border-top: 1px solid #eee;
+        }
+
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.7); 
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto; 
+            padding: 40px;
+            border-radius: 10px;
+            width: 70%; 
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+            color: #8b5a2b; float: right; font-size: 32px; font-weight: bold; cursor: pointer;
+        }
+
+        .foto-icon { font-size: 1.3em; text-align: center; display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="site-header">
+        <h1>Archivio Ms4300 - Busta 40</h1>
+        <p style="font-size: 1.2em; font-style: italic;">Biblioteca Digitale e Diagnostica Conservativa</p>
+    </div>
+
+    <div class="container">
+        <table id="tabella-archivio" class="display row-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Segnatura</th>
+                    <th>Data</th>
+                    <th>Materiale</th>
+                    <th>Tipo</th>
+                    <th>Persone</th>
+                    <th>Stato Conservazione</th>
+                    <th>Immagini</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div id="schedaDettaglio" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-titolo" style="color: #8b5a2b; border-bottom: 2px solid #c19a6b; padding-bottom: 10px;"></h2>
+            <div id="modal-corpo">
+                </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <script>
+        Papa.parse("data/CSV/Ms4300_boite40.csv", {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                
+                var table = $('#tabella-archivio').DataTable({
+                    data: results.data,
+                    columns: [
+                        { data: "cotation" },
+                        { data: "date" },
+                        { data: "material" },
+                        { data: "tipo_documento" },
+                        { data: "noms" },
+                        { data: "risque(1-5)" },
+                        { 
+                            data: "cartella_foto",
+                            render: function(data) {
+                                return (data && data.trim() !== "") ? '<span class="foto-icon">👁️</span>' : '';
+                            }
