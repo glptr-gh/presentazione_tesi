@@ -135,6 +135,7 @@
                     <th>Segnatura</th>
                     <th>Data</th>
                     <th>Materiale</th>
+                    <th>Genere</th>
                     <th>Persone</th>
                     <th>Rischio</th>
                     <th>Immagini</th> 
@@ -170,6 +171,7 @@
                         { data: "cotation" },
                         { data: "date" },
                         { data: "material" },
+                        { data: "genere" },
                         { data: "noms" },
                         { data: "risque" },
                         { 
@@ -192,11 +194,9 @@
                         <div class="scheda-grid">
                             <div class="sezione-scheda">
                                 <h3>📜 Dati Archivistici</h3>
-                                <div class="info-row"><span class="info-label">Boite:</span> ${d.boite}</div>
-                                <div class="info-row"><span class="info-label">Année:</span> ${d.annee}</div>
-                                <div class="info-row"><span class="info-label">Foliation:</span> ${d.foliation}</div>
+                                <div class="info-row"><span class="info-label">Busta:</span> ${d.boite}</div>
+                                <div class="info-row"><span class="info-label">Pagine:</span> ${d.foliation}</div>
                                 <div class="info-row"><span class="info-label">Dimensioni:</span> ${d["dimensions_mm"]}</div>
-                                <div class="info-row"><span class="info-label">Materiale:</span> ${d.material}</div>
                             </div>
                                                     
                             <div class="sezione-scheda">
