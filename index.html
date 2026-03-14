@@ -162,7 +162,7 @@
         Papa.parse(csvPath, {
             download: true, 
             header: true, 
-            delimiter: ";",
+            delimiter: ",",
             complete: function(results) {
                 
                 const table = $('#tabella-archivio').DataTable({
