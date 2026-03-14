@@ -3,151 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archivio Ms4300 - Busta 40</title>
+    <title>Itié Digital Library</title>
+    
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    
     <style>
-        body { font-family: 'Garamond', serif; background-color: #f4f4f4; margin: 0; color: #333; }
-        .site-header { background-color: #8b5a2b; color: white; padding: 30px 0; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
-        .container { width: 85%; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        body { 
+            font-family: 'Garamond', serif; 
+            background-color: #f4f4f4; 
+            margin: 0; 
+            color: #333; 
+        }
         
-        /* Estetica Tabella */
-        table.dataTable thead th { background-color: #c19a6b; color: white; border-bottom: none; padding: 15px; }
-        table.dataTable tbody tr:nth-child(even) { background-color: #fdf5e6; }
-        table.dataTable tbody tr:hover { background-color: #ffe4b5 !important; cursor: pointer; }
+        .site-header {
+            background-color: #8b5a2b; 
+            color: white; 
+            padding: 30px 0; 
+            text-align: center; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+        }
+
+        .container { 
+            width: 85%; 
+            margin: 40px auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+        }
+
+        table.dataTable thead th { 
+            background-color: #c19a6b; 
+            color: white; 
+            border-bottom: none; 
+            padding: 15px; 
+        }
         
-        /* Stile Modal (Finestra a comparsa) */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); }
-        .modal-content { background-color: #fff; margin: 5% auto; padding: 30px; border-radius: 10px; width: 70%; max-height: 85vh; overflow-y: auto; }
-        .close-btn { color: #8b5a2b; float: right; font-size: 32px; font-weight: bold; cursor: pointer; }
+        table.dataTable tbody tr:nth-child(even) { 
+            background-color: #fdf5e6; 
+        }
         
-        /* Layout Dettagli nella Modal */
-        .scheda-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .sezione-scheda { border: 1px solid #ddd; padding: 15px; border-radius: 5px; background: #fafafa; }
-        .sezione-scheda h3 { margin-top: 0; color: #8b5a2b; border-bottom: 1px solid #c19a6b; padding-bottom: 5px; font-size: 1.1em; }
-        .info-row { margin-bottom: 8px; font-size: 0.95em; border-bottom: 1px solid #eee; padding-bottom: 4px; }
-        .info-label { font-weight: bold; color: #555; }
-        .diagnostica-full { grid-column: span 2; background: #fff9f0; border: 1px solid #e6dbb9; }
-        .foto-icon { font-size: 1.3em; text-align: center; display: block; }
+        table.dataTable tbody tr:hover { 
+            background-color: #ffe4b5 !important; 
+            cursor: pointer; 
+        }
+
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0, 0, 0, 0.7); 
+        }
+        
+        .modal-content { 
+            background-color: #fff; 
+            margin: 5% auto; 
+            padding: 30px; 
+            border-radius: 10px; 
+            width: 70%; 
+            max-height: 85vh; 
+            overflow-y: auto; 
+        }
+        
+        .close-btn { 
+            color: #8b5a2b; 
+            float: right; 
+            font-size: 32px; 
+            font-weight: bold; 
+            cursor: pointer; 
+        }
+
+        .scheda-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+            margin-top: 20px; 
+        }
+        
+        .sezione-scheda { 
+            border: 1px solid #ddd; 
+            padding: 15px; 
+            border-radius: 5px; 
+            background: #fafafa; 
+        }
+        
+        .sezione-scheda h3 { 
+            margin-top: 0; 
+            color: #8b5a2b; 
+            border-bottom: 1px solid #c19a6b; 
+            padding-bottom: 5px; 
+            font-size: 1.1em; 
+        }
+        
+        .info-row { 
+            margin-bottom: 8px; 
+            font-size: 0.95em; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 4px; 
+        }
+        
+        .info-label { 
+            font-weight: bold; 
+            color: #555; 
+        }
+        
+        .diagnostica-full { 
+            grid-column: span 2; 
+            background: #fff9f0; 
+            border: 1px solid #e6dbb9; 
+        }
+        
+        .foto-icon { 
+            font-size: 1.3em; 
+            text-align: center; 
+            display: block; 
+        }
     </style>
 </head>
+
 <body>
-
-<div class="site-header">
-    <h1>Archivio Ms4300 - Busta 40</h1>
-    <p style="font-size: 1.2em; font-style: italic;">Biblioteca Digitale e Diagnostica Conservativa</p>
-</div>
-
-<div class="container">
-    <table id="tabella-archivio" class="display row-border" style="width:100%">
-        <thead>
-            <tr>
-                <th>Segnatura</th>
-                <th>Data</th>
-                <th>Materiale</th>
-                <th>Tipo</th>
-                <th>Persone</th>
-                <th>Rischio</th>
-                <th>Foto</th>
-            </tr>
-        </thead>
-    </table>
-</div>
-
-<div id="schedaDettaglio" class="modal">
-    <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h2 id="modal-titolo" style="color: #8b5a2b;"></h2>
-        <div id="modal-corpo"></div>
+    <div class="site-header">
+        <h1>Itié Digital Library</h1>
+        <p style="font-size: 1.2em; font-style: italic;">Mappatura Conservativa del fondo Itié-La Tresne</p>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <div class="container">
+        <table id="tabella-archivio" class="display row-border" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Segnatura</th>
+                    <th>Data</th>
+                    <th>Materiale</th>
+                    <th>Tipo</th>
+                    <th>Persone</th>
+                    <th>Rischio</th>
+                    <th>Immagini</th> 
+                </tr>
+            </thead>
+        </table>
+    </div>
 
-<script>
-    // Percorso preciso: cartella data -> sottocartella CSV -> file CSV.csv
-    const csvPath = "data/CSV/Ms4300_boite40.csv";
+    <div id="schedaDettaglio" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-titolo" style="color: #8b5a2b;"></h2>
+            <div id="modal-corpo"></div>
+        </div>
+    </div>
 
-    Papa.parse(csvPath, {
-        download: true,
-        header: true,
-        skipEmptyLines: true,
-        complete: function(results) {
-            console.log("Dati caricati:", results.data);
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    
+    <script>
+        const csvPath = "data/CSV/Ms4300_boite40.csv";
 
-            const table = $('#tabella-archivio').DataTable({
-                data: results.data,
-                columns: [
-                    { data: "cotation" },
-                    { data: "date" },
-                    { data: "material" },
-                    { data: "tipo_documento" },
-                    { data: "noms" },
-                    { data: "risque(1-5)" },
-                    { 
-                        data: "cartella_foto",
-                        render: function(data) {
-                            return (data && data.trim() !== "") ? '<span class="foto-icon">👁️</span>' : '';
+        Papa.parse(csvPath, {
+            download: true, 
+            header: true, 
+            delimiter: ";",
+            complete: function(results) {
+                
+                const table = $('#tabella-archivio').DataTable({
+                    data: results.data,
+                    columns: [
+                        { data: "cotation" },
+                        { data: "date" },
+                        { data: "material" },
+                        { data: "tipo" },
+                        { data: "noms" },
+                        { data: "risque" },
+                        { 
+                            data: "foto",
+                            render: function(data) {
+                                return (data && data.trim() !== "") ? '<span class="foto-icon"> 👁️ </span>' : '' ;
+                            }
                         }
-                    }
-                ],
-                language: { url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/it-IT.json' }
-            });
+                    ],
+                    language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/it-IT.json' } // Aggiunto https
+                });
 
-            // Gestione Click sulla riga per aprire i dettagli
-            $('#tabella-archivio tbody').on('click', 'tr', function () {
-                const d = table.row(this).data();
-                if (!d) return;
-
-                $('#modal-titolo').text("Documento: " + d.cotation);
-                
-                // Costruiamo il contenuto della scheda diviso in 3 sezioni
-                let html = `
-                    <div class="scheda-grid">
-                        <div class="sezione-scheda">
-                            <h3>📜 Dati Archivistici</h3>
-                            <div class="info-row"><span class="info-label">Boite:</span> ${d.boite}</div>
-                            <div class="info-row"><span class="info-label">Année:</span> ${d.annee}</div>
-                            <div class="info-row"><span class="info-label">Foliation:</span> ${d.foliation}</div>
-                            <div class="info-row"><span class="info-label">Dimensioni:</span> ${d["dimensions(mm)"]}</div>
-                            <div class="info-row"><span class="info-label">Materiale:</span> ${d.material}</div>
-                        </div>
-                        
-                        <div class="sezione-scheda">
-                            <h3>🔍 Dati Storici</h3>
-                            <div class="info-row"><span class="info-label">Tipo:</span> ${d.tipo_documento}</div>
-                            <div class="info-row"><span class="info-label">Genere:</span> ${d.genere}</div>
-                            <div class="info-row"><span class="info-label">Luoghi:</span> ${d.lieux}</div>
-                            <div class="info-row"><span class="info-label">Descrizione:</span> ${d.description_inventaire}</div>
-                        </div>
-
-                        <div class="sezione-scheda diagnostica-full">
-                            <h3>🔬 Diagnostica Conservativa</h3>
-                            <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px;">
-                                <div><b>Indice Rischio:</b> ${d["risque(1-5)"]} / 5</div>
-                                <div><b>Dechirures:</b> ${d["dechirures(0-3)"]}</div>
-                                <div><b>Lacunes:</b> ${d["lacunes(0-3)"]}</div>
-                                <div><b>Froissures:</b> ${d["froissures(0-3)"]}</div>
-                                <div><b>Taches:</b> ${d["taches(0-3)"]}</div>
-                                <div><b>Muffe:</b> ${d["moissisure(0-3)"]}</div>
-                                <div><b>Umidità:</b> ${d["humidite(0-3)"]}</div>
-                                <div><b>Insetti:</b> ${d["traces_insecte(0-3)"]}</div>
-                                <div><b>Inchiostro:</b> ${d["degradation_due_a_encre(0-3)"]}</div>
+                $('#tabella-archivio tbody').on('click', 'tr', function () {
+                    const d = table.row(this).data();
+                    if (!d) return;
+                    
+                    $('#modal-titolo').text("Documento: " + d.cotation);
+                    
+                    let html = `
+                        <div class="scheda-grid">
+                            <div class="sezione-scheda">
+                                <h3>📜 Dati Archivistici</h3>
+                                <div class="info-row"><span class="info-label">Boite:</span> ${d.boite}</div>
+                                <div class="info-row"><span class="info-label">Année:</span> ${d.annee}</div>
+                                <div class="info-row"><span class="info-label">Foliation:</span> ${d.foliation}</div>
+                                <div class="info-row"><span class="info-label">Dimensioni:</span> ${d["dimensions_mm"]}</div>
+                                <div class="info-row"><span class="info-label">Materiale:</span> ${d.material}</div>
                             </div>
-                            <div style="margin-top:10px; font-style:italic;"><b>Note:</b> ${d.remarques}</div>
+                                                    
+                            <div class="sezione-scheda">
+                                <h3>🔍 Dati Storici</h3>
+                                <div class="info-row"><span class="info-label">Genere:</span> ${d.genere}</div>
+                                <div class="info-row"><span class="info-label">Luoghi:</span> ${d.lieux}</div>
+                                <div class="info-row"><span class="info-label">Descrizione:</span> ${d.description_inventaire}</div>
+                            </div>
+
+                            <div class="sezione-scheda diagnostica-full">
+                                <h3>🔬 Diagnostica Conservativa</h3>
+                                <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:10px;">
+                                    <div><b>Indice Rischio (da 1 a 5):</b> ${d["risque"]} / 5</div>
+                                    <div><b>Strappi (da 0 a 3):</b> ${d["dechirures"]}</div>
+                                    <div><b>Spiegazzature (da 0 a 3):</b> ${d["froissures"]}</div>
+                                    <div><b>Lacune (da 0 a 3):</b> ${d["lacunes"]}</div>
+                                    <div><b>Pieghe (da 0 a 3):</b> ${d["plis"]}</div>
+                                    <div><b>Perdita di materiale (da 0 a 3):</b> ${d["perte_de_matiere"]}</div>
+                                    <div><b>Rigidità del supporto (da 0 a 1):</b> ${d["perte_de_souplesse"]}</div>
+                                    <div><b>Depositi di polvere (da 0 a 3):</b> ${d["poussiere"]}</div>
+                                    <div><b>Sbiadimento dell'inchiostro (da 0 a 3):</b> ${d["eclaircissement"]}</div>
+                                    <div><b>Macchie (da 0 a 3):</b> ${d["taches"]}</div>
+                                    <div><b>Danni causati dall'inchiostro (da 1 a 3):</b> ${d["degradation_due_a_encre"]}</div>
+                                    <div><b>Macchie di umidità (da 0 a 3):</b> ${d["humidite"]}</div>
+                                    <div><b>Presenza di muffa (da 0 a 3):</b> ${d["moissisure"]}</div>
+                                    <div><b>Tracce di insetti (da 0 a 3):</b> ${d["traces_insecte"]}</div>
+                                </div>
+                                <div style="margin-top:10px; font-style:italic;"><b>Note:</b> ${d.remarques}</div>
+                            </div>
                         </div>
-                    </div>
-                `;
-                
-                $('#modal-corpo').html(html);
-                $('#schedaDettaglio').fadeIn();
-            });
+                    `;
+                    
+                    $('#modal-corpo').html(html);
+                    $('#schedaDettaglio').fadeIn();
+                });
 
-            $('.close-btn').on('click', function() { $('#schedaDettaglio').fadeOut(); });
+                $('.close-btn').on('click', function() { $('#schedaDettaglio').fadeOut(); });
+            }
+        });
 
-    $(window).on('click', function(e) { if (e.target.className === 'modal') $('#schedaDettaglio').fadeOut(); });
-</script>
-
+        $(window).on('click', function(e) { if (e.target.className === 'modal') $('#schedaDettaglio').fadeOut(); });
+    </script>
 </body>
 </html>
